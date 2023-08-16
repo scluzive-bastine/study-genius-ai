@@ -1,10 +1,13 @@
+'use client'
+
 import Image from 'next/image'
 import { Button } from '../ui/button'
+import TypewriterComponent from 'typewriter-effect'
 
 const Hero = () => {
   return (
-    <div className='pt-[5rem] lg:pt-[12rem] relative'>
-      <div className='max-w-screen-lg mx-auto px-2 lg:px-0 relative z-50'>
+    <div className='pt-[5rem] lg:pt-[8rem] relative mb-[2.5rem] px-2 md:px-4 2xl:px-0'>
+      <div className='lg:max-w-screen-md 2xl:max-w-screen-lg mx-auto relative z-50'>
         <h1 className='text-center text-[2rem] lg:text-[3.5rem] font-[600] text-white'>
           Unlock Your Academic Potential with <br /> AI-Powered{' '}
           <span className='relative inline-block'>
@@ -24,10 +27,12 @@ const Hero = () => {
           is here to elevate your learning experience.
         </p>
         <div className='flex justify-center mt-10'>
-          <Button className='bg-white font-semibold text-[#0e0c15]'>Get Started</Button>
+          <Button className='bg-white hover:bg-white/80 font-semibold text-[#0e0c15]'>
+            Get Started
+          </Button>
         </div>
       </div>
-      <div className='max-w-screen-lg'>
+      <div className='max-w-screen-lg mb-[2rem] lg:mb-[5.5rem]'>
         <div className='absolute left-1/2 w-[78rem] aspect-square border border-gray-200/5 rounded-full -translate-x-1/2 -top-[10rem]'>
           <div className='absolute top-1/2 left-1/2 w-[65.875rem] aspect-square border border-gray-200/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse'></div>
           <div className='absolute top-1/2 left-1/2 w-[51.375rem] aspect-square border border-gray-200/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse'></div>
@@ -50,6 +55,42 @@ const Hero = () => {
           </div>
           <div className='absolute bottom-1/2 left-1/2 w-0.25 h-1/2 origin-bottom rotate-[70deg]'>
             <div className='w-6 h-6 -ml-3 -mt-3 bg-gradient-to-b from-[#88E5BE] to-[#1A1A32] rounded-full transition-transform duration-500 ease-out translate-y-0 opacity-100'></div>
+          </div>
+        </div>
+      </div>
+      <div className='relative rounded-2xl max-w-[23.25rem] md:max-w-5xl bg-vn p-1 mx-auto'>
+        <div className='w-full h-[1.375rem] bg-gray-600 flex justify-start rounded-t-[0.875rem] items-center px-2'>
+          <div className='flex space-x-2'>
+            <span className='bg-red-500 rounded-full h-2 w-2'></span>
+            <span className='bg-yellow-400 rounded-full h-2 w-2'></span>
+            <span className='bg-green-700 rounded-full h-2 w-2'></span>
+          </div>
+        </div>
+        <div className='relative'>
+          <div className='aspect-[33/40] rounded-b-[0.875rem] overflow-hidden md:aspect-[688/490] lg:aspect-[1024/490]'>
+            <Image
+              className='rounded-b-[0.875rem]'
+              fill
+              alt='Bg'
+              objectFit='cover'
+              src='/bg.jpeg'
+            />
+          </div>
+        </div>
+        <div className='flex justify-center'>
+          <div className='bg-[#0e0c15]/80 rounded-full px-3 py-1.5 lg:px-5 lg:py-3.5 absolute bottom-5 w-4/5 lg:w-3/5 backdrop-blur text-white text-lg'>
+            <TypewriterComponent
+              options={{
+                strings: [
+                  'Research Paper.',
+                  'Coding Helper.',
+                  'Note-taking Assistant.',
+                  'Language Translation Study.',
+                ],
+                autoStart: true,
+                loop: true,
+              }}
+            />
           </div>
         </div>
       </div>
