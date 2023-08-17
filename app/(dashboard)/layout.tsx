@@ -8,8 +8,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <div className='hidden h-full lg:flex md:w-72 md:flex-col md:fixed md:inset-y-0'>
         <Sidebar />
       </div>
-      <div className='lg:pl-72'>
-        <Navbar />
+      <div className='lg:pl-72 pb-20'>
+        <div className='p-2'>
+          <Navbar />
+        </div>
         {children}
       </div>
     </div>
