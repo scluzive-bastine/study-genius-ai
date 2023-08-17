@@ -8,7 +8,6 @@ const LandingPage = ({ children }: { children: React.ReactNode }) => {
     <div className='h-full'>
       <Navbar />
       <Hero />
-      {/* <Products /> */}
     </div>
   )
 }
