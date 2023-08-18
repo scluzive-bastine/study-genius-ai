@@ -61,7 +61,7 @@ const DashboardPage = () => {
             </article>
           </Link>
         ))}
-        <div className='bg-gray-900/50 p-4 h-full rounded-lg flex flex-col space-y-4 justify-between'>
+        <div className='bg-[#0b0c0e] p-4 h-full rounded-lg flex flex-col space-y-4 justify-between'>
           <div>
             <h1 className='text-white font-semibold text-2xl mb-2'>
               Imporve your knowledge by using our AI

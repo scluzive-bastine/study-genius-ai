@@ -8,5 +8,14 @@ export default withAuth({
 })
 
 export const config = {
-  matcher: ['/dashboard', '/research', '/code', '/career', '/notes', '/language', '/settings'],
+  matcher: [
+    '/dashboard',
+    '/research',
+    '/code',
+    '/career',
+    '/notes',
+    '/language',
+    '/settings',
+    '/(api|trpc)(.*)',
+  ],
 }

@@ -74,10 +74,20 @@ html, body, :root {
   * {
     @apply border-border;
   }
+  .markdown > * {
+  all: revert;
+}
+  .markdown > p {
+   @apply mt-0
+  }
   body {
     @apply bg-background text-foreground;
   }
   .bg-vn {
     background-image: conic-gradient(from 225deg,#ffc876,#79fff7,#FF725E,#ff98e2,#ffc876);
+  }
+
+  .bg-fg {
+    background-image: linear-gradient(360deg,rgba(53,55,64,0),#17181C 58.85%);
   }
 }
