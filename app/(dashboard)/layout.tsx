@@ -4,12 +4,12 @@ import React from 'react'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='relative h-full'>
+    <div className='relative h-full bg-[#17181C]'>
       <div className='hidden h-full lg:flex md:w-72 md:flex-col md:fixed md:inset-y-0'>
         <Sidebar />
       </div>
-      <div className='lg:pl-72 pb-20'>
-        <div className='p-2'>
+      <div className='lg:pl-72 pb-20 bg-[#17181C]'>
+        <div className=''>
           <Navbar />
         </div>
         {children}

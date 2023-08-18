@@ -54,10 +54,10 @@ const Sidebar = () => {
   const pathname = usePathname()
 
   return (
-    <div className='space-y-4 py-4 flex flex-col h-full bg-[#08070e] text-white'>
+    <div className='space-y-4 py-4 flex flex-col h-full bg-[#0b0c0e] text-white'>
       <div className='px-3 py-4 flex-1'>
         <Link href='/dashboard'>
-          <div className='bg-[#0e0c15] flex justify-start w-full mb-5 p-3 rounded-xl'>
+          <div className='bg-[#22232a] flex justify-start w-full mb-5 p-3 rounded-lg'>
             <div className='w-8 h-8 mr-4 relative'>
               <Image fill src='/mobile-logo.svg' alt='Logo' />
             </div>
@@ -69,7 +69,7 @@ const Sidebar = () => {
             </div>
           </div>
         </Link>
-        <div className='space-y-1 p-2 rounded-2xl bg-[#0e0c15]'>
+        <div className='space-y-1 p-2 rounded-2xl bg-[#22232a]'>
           {routes.map((route) => (
             <Link
               href={route.href}
@@ -87,7 +87,7 @@ const Sidebar = () => {
         </div>
       </div>
       <div className='px-3'>
-        <div className='bg-[#0e0c15] rounded-lg p-3'>
+        <div className='bg-[#22232a] rounded-lg p-3'>
           <h1 className='mb-3 text-muted-foreground text-sm'>Customize</h1>
           <Link
             href='/settings'
