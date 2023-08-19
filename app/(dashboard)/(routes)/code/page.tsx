@@ -1,26 +1,31 @@
 'use client'
-import Header from '@/components/dashboard/header'
-import { useForm } from 'react-hook-form'
+
+import BotAvatar from '@/components/dashboard/bot-avatar'
 import * as z from 'zod'
-import { formSchema } from './constants'
-import { zodResolver } from '@hookform/resolvers/zod'
+
+import Header from '@/components/dashboard/header'
+import UserAvatar from '@/components/dashboard/user-image'
+import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { CornerDownRightIcon } from 'lucide-react'
-import { ChatCompletionRequestMessage } from 'openai'
-import { useState } from 'react'
-import axios from 'axios'
-import ReactMarkdown from 'react-markdown'
-
-import { cn } from '@/lib/utils'
-import UserAvatar from '@/components/dashboard/user-image'
-import BotAvatar from '@/components/dashboard/bot-avatar'
-import Empty from '@/components/dashboard/no-conversation'
 import { Skeleton } from '@/components/ui/skeleton'
+import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import ReactMarkdown from 'react-markdown'
+import { formSchema } from './constants'
+import axios from 'axios'
+import { ChatCompletionRequestMessage } from 'openai'
+import { CornerDownRightIcon } from 'lucide-react'
+import Empty from '@/components/dashboard/no-conversation'
 
-const ResearchPage = () => {
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+
+const CodePage = () => {
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
+  const contentRef = useRef<HTMLDivElement>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -28,7 +33,6 @@ const ResearchPage = () => {
       prompt: '',
     },
   })
-
   const isLoading = form.formState.isSubmitting
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -39,7 +43,7 @@ const ResearchPage = () => {
       }
       const newMessages = [...messages, userMessage]
 
-      const response = await axios.post('/api/research', {
+      const response = await axios.post('/api/code', {
         userMessages: newMessages,
       })
       setMessages((current) => [...current, userMessage, response.data])
@@ -52,12 +56,17 @@ const ResearchPage = () => {
     }
   }
 
+  useEffect(() => {
+    if (messages.length) {
+      contentRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      })
+    }
+  }, [messages.length])
   return (
     <div className='relative'>
-      <Header
-        title='Research Paper Assistant'
-        description='Navigate the complex world of academia'
-      />
+      <Header title='Code Helper' description='Tackle coding challenges with confidence' />
       <div className='text-gray-200 max-w-screen-md mx-auto relative px-2 md:px-0'>
         <div className='sticky top-0'>
           <div className='absolute bg-fg pb-10 w-full h-36'></div>
@@ -79,7 +88,7 @@ const ResearchPage = () => {
                   <FormItem className='col-span-10 ml-16 relative'>
                     <FormControl className='m-0 p-0'>
                       <Input
-                        placeholder='Ask me something...'
+                        placeholder='Write a function to reverse a string in javascript...'
                         className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent autofill:bg-transparent h-14'
                         {...field}
                         disabled={isLoading}
@@ -105,7 +114,7 @@ const ResearchPage = () => {
         {messages.length === 0 && !isLoading ? (
           <Empty label='No Conversations yet!' />
         ) : (
-          <div className='mt-16'>
+          <div className='mt-16 '>
             {messages.map((message) => (
               <div
                 className={cn(
@@ -119,7 +128,28 @@ const ResearchPage = () => {
                   {message.role === 'user' ? (
                     <div className='flex space-x-4'>{message.content}</div>
                   ) : (
-                    <ReactMarkdown className='overflow-hidden leading-7 markdown text-base'>
+                    <ReactMarkdown
+                      className='text-base overflow-hidden leading-7 markdown w-full'
+                      components={{
+                        code({ node, inline, className, children, ...props }) {
+                          const match = /language-(\w+)/.exec(className || '')
+                          return !inline && match ? (
+                            <SyntaxHighlighter
+                              {...props}
+                              // eslint-disable-next-line react/no-children-prop
+                              children={String(children).replace(/\n$/, '')}
+                              style={oneDark}
+                              language={match[1]}
+                              PreTag='div'
+                            />
+                          ) : (
+                            <code {...props} className='bg-gray-500/50 rounded p-1'>
+                              {children}
+                            </code>
+                          )
+                        },
+                      }}
+                    >
                       {message.content || ''}
                     </ReactMarkdown>
                   )}
@@ -137,9 +167,10 @@ const ResearchPage = () => {
             </div>
           </div>
         )}
+        <div ref={contentRef}></div>
       </div>
     </div>
   )
 }
 
-export default ResearchPage
+export default CodePage

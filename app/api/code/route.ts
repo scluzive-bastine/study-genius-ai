@@ -16,7 +16,8 @@ export async function POST(req: Request) {
     const conversation = [
       {
         role: 'system',
-        content: 'You are a research assistant that helps students with their research questions.',
+        content:
+          'You are a code generator. You must answer only in markdown code snippets. Always code comments for explanations',
       },
       ...userMessages, // Destructure and include userMessages
     ]
