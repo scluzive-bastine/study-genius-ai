@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { CornerDownRightIcon, DownloadIcon } from 'lucide-react'
+import { CornerDownRightIcon } from 'lucide-react'
 import { ChatCompletionRequestMessage } from 'openai'
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
@@ -19,7 +19,7 @@ import BotAvatar from '@/components/dashboard/bot-avatar'
 import Empty from '@/components/dashboard/no-conversation'
 import { Skeleton } from '@/components/ui/skeleton'
 
-const NotesPage = () => {
+const LanguagePage = () => {
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
   const contentRef = useRef<HTMLDivElement>(null)
 
@@ -40,7 +40,7 @@ const NotesPage = () => {
       }
       const newMessages = [...messages, userMessage]
 
-      const response = await axios.post('/api/notes', {
+      const response = await axios.post('/api/language', {
         userMessages: newMessages,
       })
       setMessages((current) => [...current, userMessage, response.data])
@@ -50,37 +50,6 @@ const NotesPage = () => {
       // TODO OPEN PRO MODEL
       console.log(error.message)
     } finally {
-    }
-  }
-
-  const handleDownload = async (content: string | undefined) => {
-    try {
-      console.log(content)
-
-      // Make a POST request to the download API route
-      const response = await axios.post(
-        '/api/pdf',
-        { content },
-        {
-          responseType: 'arraybuffer', // Response type for binary data
-        }
-      )
-      // Create a Blob from the response data
-      const blob = new Blob([response.data], { type: 'application/pdf' })
-      // Create a URL from the Blob
-      const url = window.URL.createObjectURL(blob)
-      // Create a temporary link to trigger the download
-      const a = document.createElement('a')
-      a.style.display = 'none'
-      a.href = url
-      a.download = 'note_assistant_response.pdf'
-      document.body.appendChild(a)
-      a.click()
-      // Clean up the temporary elements
-      window.URL.revokeObjectURL(url)
-      document.body.removeChild(a)
-    } catch (error) {
-      console.error('Error:', error)
     }
   }
 
@@ -96,15 +65,15 @@ const NotesPage = () => {
   return (
     <div className='relative'>
       <Header
-        title='Note-Taking Assistant'
-        description='Designed to transform your study experience'
+        title='Language Translation'
+        description='Seamlessly translate complex academic texts '
       />
-      <div className='text-gray-200 max-w-screen-md mx-auto relative px-2 md:px-0 mt-20'>
-        <div className='sticky top-0 z-10'>
+      <div className='text-gray-200 max-w-screen-md mx-auto relative px-2 md:px-0'>
+        <div className='sticky top-0'>
           <div className='absolute bg-fg pb-10 w-full h-36'></div>
         </div>
 
-        <div className='sticky top-2 z-50'>
+        <div className='mt-10 sticky top-2 z-50'>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -120,7 +89,7 @@ const NotesPage = () => {
                   <FormItem className='col-span-10 ml-16 relative'>
                     <FormControl className='m-0 p-0'>
                       <Input
-                        placeholder='Paste your notes here...'
+                        placeholder='Ask me something...'
                         className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent autofill:bg-transparent h-14'
                         {...field}
                         disabled={isLoading}
@@ -158,23 +127,11 @@ const NotesPage = () => {
                 <div className='flex space-x-4 items-start'>
                   {message.role === 'user' ? <UserAvatar width='8' height='8' /> : <BotAvatar />}
                   {message.role === 'user' ? (
-                    <ReactMarkdown className='flex space-x-4 max-h-[200px] overflow-auto leading-7 markdown text-base'>
+                    <div className='flex space-x-4'>{message.content}</div>
+                  ) : (
+                    <ReactMarkdown className='overflow-hidden leading-7 markdown text-base'>
                       {message.content || ''}
                     </ReactMarkdown>
-                  ) : (
-                    <div className='flex flex-col lg:flex-row relative'>
-                      <ReactMarkdown className='overflow-hidden leading-7 markdown text-base'>
-                        {message.content || ''}
-                      </ReactMarkdown>
-                      <div className='relative flex-shrink-0 flex justify-end'>
-                        <Button
-                          onClick={() => handleDownload(message.content)}
-                          className=' bg-[#0b0c0e] hover:bg-white/10'
-                        >
-                          <DownloadIcon className='w-4 h-4 mr-2' /> {'PDF'}
-                        </Button>
-                      </div>
-                    </div>
                   )}
                 </div>
               </div>
@@ -192,9 +149,8 @@ const NotesPage = () => {
         )}
         <div ref={contentRef}></div>
       </div>
-      {/* <div className='bg-gray-800 rounded h-72'></div> */}
     </div>
   )
 }
 
-export default NotesPage
+export default LanguagePage

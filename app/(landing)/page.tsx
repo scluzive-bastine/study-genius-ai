@@ -5,7 +5,7 @@ import React from 'react'
 
 const LandingPage = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='h-full'>
+    <div className='h-full pb-20 md:pb-4'>
       <Navbar />
       <Hero />
     </div>

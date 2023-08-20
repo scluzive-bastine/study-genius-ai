@@ -33,11 +33,11 @@ const routes = [
     icon: CodeIcon,
     href: '/code',
   },
-  {
-    label: 'Career Path',
-    icon: MilestoneIcon,
-    href: '/career',
-  },
+  // {
+  //   label: 'Career Path',
+  //   icon: MilestoneIcon,
+  //   href: '/career',
+  // },
   {
     label: 'Note-Taking Assistant',
     icon: BookOpenIcon,

@@ -3,10 +3,11 @@
 import Image from 'next/image'
 import { Button } from '../ui/button'
 import TypewriterComponent from 'typewriter-effect'
+import Link from 'next/link'
 
 const Hero = () => {
   return (
-    <div className='pt-[5rem] lg:pt-[8rem] relative mb-[2.5rem] px-2 md:px-4 2xl:px-0'>
+    <div className='pt-[5rem] lg:pt-[8rem] relative mb-[2.5rem] px-2 md:px-4 2xl:px-0 overflow-hidden'>
       <div className='lg:max-w-screen-md 2xl:max-w-screen-lg mx-auto relative z-50'>
         <h1 className='text-center text-[2rem] lg:text-[3.5rem] font-[600] text-white'>
           Unlock Your Academic Potential with <br /> AI-Powered{' '}
@@ -27,9 +28,11 @@ const Hero = () => {
           is here to elevate your learning experience.
         </p>
         <div className='flex justify-center mt-10'>
-          <Button className='bg-white hover:bg-white/80 font-semibold text-[#0e0c15]'>
-            Get Started
-          </Button>
+          <Link href='/dashboard'>
+            <Button className='bg-white hover:bg-white/80 font-semibold text-[#0e0c15]'>
+              Get Started
+            </Button>
+          </Link>
         </div>
       </div>
       <div className='max-w-screen-lg mb-[2rem] lg:mb-[5.5rem]'>

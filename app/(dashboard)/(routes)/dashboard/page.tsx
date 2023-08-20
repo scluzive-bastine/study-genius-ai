@@ -18,12 +18,12 @@ const services = [
       'Your Personal Programming Guide. Tackle coding challenges with confidence using our AI-powered Code Helper. Receive instant suggestions, debug insights, and optimize your code for efficiency. Let AI be your co-pilot on your coding journey, turning challenges into triumphs.',
     href: '/code',
   },
-  {
-    title: 'Career Path',
-    description:
-      'Our Career Path Advisor is your compass in the professional world. Discover tailored career trajectories based on your passions, strengths, and ambitions. Let AI guide you toward the opportunities that align with your aspirations and open doors to a fulfilling future.',
-    href: '/career',
-  },
+  // {
+  //   title: 'Career Path',
+  //   description:
+  //     'Our Career Path Advisor is your compass in the professional world. Discover tailored career trajectories based on your passions, strengths, and ambitions. Let AI guide you toward the opportunities that align with your aspirations and open doors to a fulfilling future.',
+  //   href: '/career',
+  // },
   {
     title: 'Note-Taking Assistant',
     description:
