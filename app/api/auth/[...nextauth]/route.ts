@@ -12,7 +12,11 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    session({ session, token, user }) {
+    session({ session, token }) {
+      if (session) {
+        session.user.id = token.sub
+      }
+
       return session // The return type will match the one returned in `useSession()`
     },
   },

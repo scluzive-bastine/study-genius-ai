@@ -9,11 +9,13 @@ import {
   LibraryIcon,
   MilestoneIcon,
   SettingsIcon,
+  ZapIcon,
 } from 'lucide-react'
 import { Montserrat } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import ApiCounter from './api-counter'
 
 const montserrat = Montserrat({ weight: '600', subsets: ['latin'] })
 
@@ -50,7 +52,12 @@ const routes = [
   },
 ]
 
-const Sidebar = () => {
+interface SidebarProps {
+  apiLimitCount: number
+  // isPro: boolean
+}
+
+const Sidebar = ({ apiLimitCount = 0 }: SidebarProps) => {
   const pathname = usePathname()
 
   return (
@@ -89,6 +96,7 @@ const Sidebar = () => {
       <div className='px-3'>
         <div className='bg-[#22232a] rounded-lg p-3'>
           <h1 className='mb-3 text-muted-foreground text-sm'>Customize</h1>
+          <ApiCounter apiLimitCount={apiLimitCount} />
           <Link
             href='/settings'
             className={cn(

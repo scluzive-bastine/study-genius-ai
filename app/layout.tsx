@@ -5,6 +5,8 @@ import { Inter } from 'next/font/google'
 import Provider from './context/client-provider'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from './api/auth/[...nextauth]/route'
+import { ToasterProvider } from '@/components/toaster-provider'
+import { ModalProvider } from '@/components/dashboard/modal-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +20,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang='en'>
       <body className={cn('bg-[#0e0c15]', inter.className)}>
-        <Provider session={session}>{children}</Provider>
+        <Provider session={session}>
+          <ToasterProvider />
+          <ModalProvider />
+          {children}
+        </Provider>
       </body>
     </html>
   )

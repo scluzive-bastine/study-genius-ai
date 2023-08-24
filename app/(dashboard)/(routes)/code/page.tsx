@@ -19,13 +19,19 @@ import axios from 'axios'
 import { ChatCompletionRequestMessage } from 'openai'
 import { CornerDownRightIcon } from 'lucide-react'
 import Empty from '@/components/dashboard/no-conversation'
+import toast from 'react-hot-toast'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { useProModal } from '@/hooks/pro-modal'
+import { useRouter } from 'next/navigation'
 
 const CodePage = () => {
+  const router = useRouter()
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
   const contentRef = useRef<HTMLDivElement>(null)
+
+  const proModal = useProModal()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,8 +57,14 @@ const CodePage = () => {
       form.reset()
     } catch (error: any) {
       // TODO OPEN PRO MODEL
+      if (error.response.status === 403) {
+        proModal.onOpen()
+      } else {
+        toast.error('Something we wrong')
+      }
       console.log(error.message)
     } finally {
+      router.refresh()
     }
   }
 
