@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { LogOutIcon, PlusCircleIcon } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
