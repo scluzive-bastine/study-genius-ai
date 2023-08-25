@@ -7,9 +7,7 @@ import {
   GraduationCapIcon,
   LayoutDashboardIcon,
   LibraryIcon,
-  MilestoneIcon,
   SettingsIcon,
-  ZapIcon,
 } from 'lucide-react'
 import { Montserrat } from 'next/font/google'
 import Image from 'next/image'

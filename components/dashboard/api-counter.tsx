@@ -26,6 +26,8 @@ const ApiCounter = ({ apiLimitCount = 0, isPro = false }: FreeCounterProps) => {
     return null
   }
 
+  console.log(isPro)
+
   return (
     <div>
       <div className='text-center text-sm text-white mb-4 space-y-2'>
