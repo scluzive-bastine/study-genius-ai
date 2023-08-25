@@ -4,7 +4,6 @@ import { withAuth } from 'next-auth/middleware'
 
 export default withAuth({
   secret: process.env.SECRET,
-  callbacks: {},
 })
 
 export const config = {
@@ -16,6 +15,12 @@ export const config = {
     '/notes',
     '/language',
     '/settings',
-    '/(api|trpc)(.*)',
+    // '/(api|trpc)(.*)',
+    '/api/code',
+    '/api/langauge',
+    '/api/notes',
+    '/api/research',
+    // '/api/stripe',
+    '/api/pdf',
   ],
 }

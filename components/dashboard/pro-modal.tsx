@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
+import axios from 'axios'
 
 const tools = [
   {
@@ -54,11 +55,9 @@ const ProModal = () => {
   const onSubscribe = async () => {
     try {
       setLoading(true)
-      //   const response = await axios.get('/api/stripe')
+      const response = await axios.get('/api/stripe')
 
-      //   window.location.href = response.data.url
-
-      console.log('subscribe clicked')
+      window.location.href = response.data.url
     } catch (error) {
       console.log(error, 'STRIPE_ERROR')
     } finally {

@@ -1,15 +1,30 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { Progress } from '../ui/progress'
 import { ZapIcon } from 'lucide-react'
 import { MAX_FREE_COUNTS } from '@/constants'
 import { useProModal } from '@/hooks/pro-modal'
+import { useEffect, useState } from 'react'
 
 interface FreeCounterProps {
   apiLimitCount: number
-  //   isPro: boolean
+  isPro: boolean
 }
-const ApiCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
+const ApiCounter = ({ apiLimitCount = 0, isPro = false }: FreeCounterProps) => {
   const proModal = useProModal()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
+  if (isPro) {
+    return null
+  }
 
   return (
     <div>

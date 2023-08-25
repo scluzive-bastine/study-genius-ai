@@ -18,9 +18,14 @@ import UserAvatar from '@/components/dashboard/user-image'
 import BotAvatar from '@/components/dashboard/bot-avatar'
 import Empty from '@/components/dashboard/no-conversation'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useRouter } from 'next/navigation'
+import { useProModal } from '@/hooks/pro-modal'
+import toast from 'react-hot-toast'
 
 const ResearchPage = () => {
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
+  const proModal = useProModal()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,8 +52,14 @@ const ResearchPage = () => {
       form.reset()
     } catch (error: any) {
       // TODO OPEN PRO MODEL
+      if (error.response.status === 403) {
+        proModal.onOpen()
+      } else {
+        toast.error('Something went wrong')
+      }
       console.log(error.message)
     } finally {
+      router.refresh()
     }
   }
 

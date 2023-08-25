@@ -60,7 +60,7 @@ const CodePage = () => {
       if (error.response.status === 403) {
         proModal.onOpen()
       } else {
-        toast.error('Something we wrong')
+        toast.error('Something went wrong')
       }
       console.log(error.message)
     } finally {

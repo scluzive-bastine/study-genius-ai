@@ -54,10 +54,10 @@ const routes = [
 
 interface SidebarProps {
   apiLimitCount: number
-  // isPro: boolean
+  isPro: boolean
 }
 
-const Sidebar = ({ apiLimitCount = 0 }: SidebarProps) => {
+const Sidebar = ({ apiLimitCount = 0, isPro = false }: SidebarProps) => {
   const pathname = usePathname()
 
   return (
@@ -96,7 +96,7 @@ const Sidebar = ({ apiLimitCount = 0 }: SidebarProps) => {
       <div className='px-3'>
         <div className='bg-[#22232a] rounded-lg p-3'>
           <h1 className='mb-3 text-muted-foreground text-sm'>Customize</h1>
-          <ApiCounter apiLimitCount={apiLimitCount} />
+          <ApiCounter apiLimitCount={apiLimitCount} isPro={isPro} />
           <Link
             href='/settings'
             className={cn(
